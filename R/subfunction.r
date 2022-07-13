@@ -477,17 +477,17 @@ my_PhD.q.est <- function (ai, Lis, q, nt, cal)
     deltas_pt2 <- sapply(0:(nt - 1), function(k) {
       ai_delt_I <- ai <= (nt - k)
       deltas_pt2 <- rep(0, S)
-      deltas_pt2[ai_delt_I] <- iNEXTPD2:::delta_part2(ai = ai[ai_delt_I],
+      deltas_pt2[ai_delt_I] <- iNEXT.3D:::delta_part2(ai = ai[ai_delt_I],
                                                       k = k, n = nt)
       deltas_pt2
     }) %>% t()
   }
   Sub <- function(q, g1, g2, PD_obs, t_bar, Li) {
     if (q == 0) {
-      ans <- PD_obs + iNEXTPD2:::Dq0(nt, f1, f2, g1, g2)
+      ans <- PD_obs + iNEXT.3D:::PDq0(nt, f1, f2, g1, g2)
     }
     else if (q == 1) {
-      h2 <- iNEXTPD2:::Dq1_2(nt, g1, A)
+      h2 <- iNEXT.3D:::PDq1_2(nt, g1, A)
       h1 <- sum(Li * h1_pt2)
       h <- h1 + h2
       ans <- t_bar * exp(h/t_bar)
@@ -978,18 +978,18 @@ iNEXTbeta.PDlink <- function(data, level, datatype='abundance', q = c(0, 1, 2),
           res = sapply(m, function(mm){
             if(mm < n){
               if(mm == round(mm)){
-                qPDm <- iNEXTPD2:::PhD.m.est(ai = aL_table$branch.abun,
+                qPDm <- iNEXT.3D:::PhD.m.est(ai = aL_table$branch.abun,
                                              Lis = aL_table$branch.length%>%as.matrix(),m = mm,
                                              q = q,nt = n,cal = 'PD')
                 return(qPDm)
               }else {
-                qPDm_raw <- iNEXTPD2:::PhD.m.est(ai = aL_table$branch.abun,
+                qPDm_raw <- iNEXT.3D:::PhD.m.est(ai = aL_table$branch.abun,
                                                  Lis = aL_table$branch.length%>%as.matrix(),m = mm,
                                                  q = q,nt = n,cal = 'PD')
-                qPDm_floor <- iNEXTPD2:::PhD.m.est(ai = aL_table$branch.abun,
+                qPDm_floor <- iNEXT.3D:::PhD.m.est(ai = aL_table$branch.abun,
                                                    Lis = aL_table$branch.length%>%as.matrix(),m = floor(mm),
                                                    q = q,nt = n,cal = 'PD')
-                qPDm_ceil <- iNEXTPD2:::PhD.m.est(ai = aL_table$branch.abun,
+                qPDm_ceil <- iNEXT.3D:::PhD.m.est(ai = aL_table$branch.abun,
                                                   Lis = aL_table$branch.length%>%as.matrix(),m = ceiling(mm),
                                                   q = q,nt = n,cal = 'PD')
                 # y = [ (y2 -y1) / (x2 - x1) ] (x - x1) + y1
@@ -997,7 +997,7 @@ iNEXTbeta.PDlink <- function(data, level, datatype='abundance', q = c(0, 1, 2),
                 return(qPDm_interpolated)
               }
             }else{
-              qPDm <- iNEXTPD2:::PhD.m.est(ai = aL_table$branch.abun,
+              qPDm <- iNEXT.3D:::PhD.m.est(ai = aL_table$branch.abun,
                                            Lis = aL_table$branch.length%>%as.matrix(),m = mm,
                                            q = q,nt = n,cal = 'PD')
               return(qPDm)
@@ -1243,7 +1243,7 @@ iNEXTbeta.PDlink <- function(data, level, datatype='abundance', q = c(0, 1, 2),
         get_phylogenetic_alpha_gamma_bootstrap <- function(aL_table_gamma, aL_table_alpha,
                                                            n, m_gamma, m_alpha){
           ## 1. gamma
-          gamma <- iNEXTPD2:::PhD.m.est(ai = aL_table_gamma$branch.abun,
+          gamma <- iNEXT.3D:::PhD.m.est(ai = aL_table_gamma$branch.abun,
                                         Lis = aL_table_gamma$branch.length%>%as.matrix(),m = m_gamma,
                                         q = q,nt = n,cal = 'PD')%>%t%>% as.vector()
           ## 2. alpha

@@ -142,7 +142,6 @@ ggSC.link <- function(outcome){
 #' @import tidytree
 #' @import colorRamps
 #' @import iNEXT.3D
-#' @import iNEXTPD2
 #' @import iNEXT.4steps
 #' @import chaoUtility
 #' @import future
@@ -419,7 +418,6 @@ ggiNEXT.link <- function(outcome, diversity = 'TD', type = c(1,2,3) ,se = TRUE,f
 #' @import tidytree
 #' @import colorRamps
 #' @import iNEXT.3D
-#' @import iNEXTPD2
 #' @import iNEXT.4steps
 #' @import chaoUtility
 #' @import future.apply
@@ -523,7 +521,6 @@ Asy.link <- function(data, diversity = 'TD', q = seq(0, 2, 0.2), datatype = "abu
 #' @import tidytree
 #' @import colorRamps
 #' @import iNEXT.3D
-#' @import iNEXTPD2
 #' @import iNEXT.4steps
 #' @import chaoUtility
 #' @import future.apply
@@ -774,7 +771,6 @@ ggAsy.link <- function(outcome, diversity = 'TD', text.size = 14){
 #' @import tidytree
 #' @import colorRamps
 #' @import iNEXT.3D
-#' @import iNEXTPD2
 #' @import iNEXT.4steps
 #' @import chaoUtility
 #' @import future.apply
@@ -945,7 +941,6 @@ estimateD.link = function(data, diversity = 'TD', q = c(0, 1, 2),datatype = "abu
 #' @import tidytree
 #' @import colorRamps
 #' @import iNEXT.3D
-#' @import iNEXTPD2
 #' @import iNEXT.4steps
 #' @import chaoUtility
 #' @import future.apply
@@ -1271,7 +1266,6 @@ ggiNEXTbeta.link <- function(outcome, type = c('B', 'D'),
 #' @import tidytree
 #' @import colorRamps
 #' @import iNEXT.3D
-#' @import iNEXTPD2
 #' @import iNEXT.4steps
 #' @import chaoUtility
 #' @import future.apply
