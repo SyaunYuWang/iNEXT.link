@@ -165,7 +165,7 @@ ggSC.link <- function(outcome){
 #' @examples
 #' ## Taxonomic diversity
 #' data(beetles)
-#' output1 = iNEXTlink(data = beetles, diversity = 'TD', q = c(0,1,2))
+#' output1 = iNEXT.link(data = beetles, diversity = 'TD', q = c(0,1,2))
 #' output1$DataInfo # showing basic data information.
 #' output1$iNextEst # showing diversity estimates with rarefied and extrapolated.
 #' output1$AsyEst # showing asymptotic diversity estimates.
@@ -174,21 +174,21 @@ ggSC.link <- function(outcome){
 #' ## Phylogenetic diversity
 #' data(beetles)
 #' data(beetles_col_tree)
-#' output2 = iNEXTlink(data = beetles, diversity = 'PD', q = c(0,1,2), col.tree = beetles_col_tree)
+#' output2 = iNEXT.link(data = beetles, diversity = 'PD', q = c(0,1,2), col.tree = beetles_col_tree)
 #' output2
 #'
 #'
 #' ## Functional diversity under single threshold
 #' data(beetles)
 #' data(beetles_col_distM)
-#' output3 = iNEXTlink(data = beetles, diversity = 'FD', q = c(0,1,2), col.distM = beetles_col_distM, FDtype = "tau_values")
+#' output3 = iNEXT.link(data = beetles, diversity = 'FD', q = c(0,1,2), col.distM = beetles_col_distM, FDtype = "tau_values")
 #' output3
 #'
 #'
 #' ## Functional diversity with thresholds integrating from 0 to 1
 #' data(beetles)
 #' data(beetles_col_distM)
-#' output4 = iNEXTlink(data = beetles, diversity = 'FD', q = c(0,1,2), col.distM = beetles_col_distM, FDtype = "AUC")
+#' output4 = iNEXT.link(data = beetles, diversity = 'FD', q = c(0,1,2), col.distM = beetles_col_distM, FDtype = "AUC")
 #' output4
 #'
 #' @references

@@ -31,6 +31,7 @@ Imports:
     sets,
     phyclust,
     future.apply,
+    future,
     reshape2,
     utils,
     PhD,
