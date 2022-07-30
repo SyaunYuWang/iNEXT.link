@@ -324,10 +324,17 @@ iNEXT.link <- function(data, diversity = 'TD', q = c(0,1,2), datatype = "abundan
 ggiNEXT.link <- function(outcome, diversity = 'TD', type = c(1,2,3) ,se = TRUE,facet.var = "Assemblage",
                          color.var = "Order.q", text.size = 12, stript.size = 12){
   if(diversity == 'TD'){
-    iNEXT.3D::ggiNEXT3D(outcome, type = type,facet.var = facet.var)
-
+    res = iNEXT.3D::ggiNEXT3D(outcome, type = type,facet.var = facet.var)
+    res[[1]] = res[[1]]+ylab("Taxonomic network diversity")+xlab("Sample size")
+    res[[2]] = res[[2]]+xlab("Sample size")
+    res[[3]] = res[[3]]+ylab("Taxonomic network diversity")
+    res
   }else if(diversity == 'PD'){
-    iNEXT.3D::ggiNEXT3D(outcome, type = type,facet.var = facet.var)
+    res = iNEXT.3D::ggiNEXT3D(outcome, type = type,facet.var = facet.var)
+    res[[1]] = res[[1]]+ylab("Phylogenetic network diversity")+xlab("Sample size")
+    res[[2]] = res[[2]]+xlab("Sample size")
+    res[[3]] = res[[3]]+ylab("Phylogenetic network diversity")
+    res
     # # output = outcome
     # # output$iNextEst$size_based = output$iNextEst$size_based%>%
     # #   rename('qD'="PD", 'qD.UCL'="PD.UCL",'qD.LCL'="PD.LCL")
@@ -384,7 +391,11 @@ ggiNEXT.link <- function(outcome, diversity = 'TD', type = c(1,2,3) ,se = TRUE,f
 
 
   }else if(diversity == 'FD'){
-    iNEXT.3D::ggiNEXT3D(outcome, type = type,facet.var = facet.var)
+    res = iNEXT.3D::ggiNEXT3D(outcome, type = type,facet.var = facet.var)
+    res[[1]] = res[[1]]+ylab("Functional network diversity")+xlab("Sample size")
+    res[[2]] = res[[2]]+xlab("Sample size")
+    res[[3]] = res[[3]]+ylab("Functional network diversity")
+    res
   }
 }
 
@@ -643,9 +654,10 @@ ggObs.link <- function(outcome, diversity = 'TD', text.size = 14){
                      "#330066", "#CC79A7", "#0072B2", "#D55E00"))
   if(diversity %in% c('TD','PD')){
     if(diversity == 'TD'){
-      ylab = 'taxonomic diversity'
+
+      ylab = 'Taxonomic network diversity'
     }else if(diversity == 'PD') {
-      ylab = 'phylogenetic diversity'
+      ylab = 'Phylogenetic network diversity'
     }
     ggplot(outcome, aes(x = Order.q, y = qD, colour = Network, lty = Method)) +
       geom_line(size = 1.2) + scale_colour_manual(values = cbPalette) +
@@ -661,7 +673,7 @@ ggObs.link <- function(outcome, diversity = 'TD', text.size = 14){
       )
 
   }else if(diversity == 'FD'){
-    iNEXT.3D:::ggasy3D(outcome)
+    iNEXT.3D:::ggasy3D(outcome)+ylab("Functional network diversity")
   }
 
 }
@@ -710,9 +722,9 @@ ggAsy.link <- function(outcome, diversity = 'TD', text.size = 14){
   #   stop("Please use the outcome from specified function 'AsyD'")
   if(diversity %in% c('TD','PD')){
     if(diversity == 'TD'){
-      ylab = 'taxonomic diversity'
+      ylab = 'Taxonomic network diversity'
     }else if(diversity == 'PD') {
-      ylab = 'phylogenetic diversity'
+      ylab = 'Phylogenetic network diversity'
     }
     ggplot(outcome, aes(x = Order.q, y = qD, colour = Network, lty = Method)) +
       geom_line(size = 1.2) + scale_colour_manual(values = cbPalette) +
@@ -730,7 +742,7 @@ ggAsy.link <- function(outcome, diversity = 'TD', text.size = 14){
     # +labs(x = "Order q", y = "Network phylogenetic diversity", lty = "Method") + scale_linetype_manual(values=c("dashed","solid"))
 
   }else if(diversity == 'FD'){
-    iNEXT.3D:::ggasy3D(outcome)
+    iNEXT.3D:::ggasy3D(outcome)+ylab("Functional network diversity")
   }
 
 }
@@ -1313,9 +1325,9 @@ Spec.link <- function(data, q = seq(0, 2, 0.2),
         return(res[[1]])
       })%>%do.call("rbind",.)
 
-      each_class%>%mutate(class = paste0("E",e))
+      each_class%>%mutate(class = paste0("1-E",e))
     })
-    names(Spec) = paste0("E",E.class)
+    names(Spec) = paste0("1-E",E.class)
     return(Spec)
 
   }else if (diversity == 'PD'){
@@ -1344,7 +1356,7 @@ Spec.link <- function(data, q = seq(0, 2, 0.2),
         return(res[[1]])
       })%>%do.call("rbind",.)
 
-      each_class%>%mutate(class = paste0("E",e))
+      each_class%>%mutate(class = paste0("1-E",e))
     })
 
 
@@ -1409,7 +1421,7 @@ Spec.link <- function(data, q = seq(0, 2, 0.2),
         return(res[[1]])
       })%>%do.call("rbind",.)
 
-      each_class%>%mutate(class = paste0("E",e))
+      each_class%>%mutate(class = paste0("1-E",e))
     })
     # ### not finished yet
     # long = lapply(data, function(da){da%>%as.data.frame()%>%gather(key = "col_sp", value = "abundance")%>%.[,2]})
