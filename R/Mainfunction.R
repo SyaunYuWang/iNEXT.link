@@ -324,17 +324,31 @@ iNEXT.link <- function(data, diversity = 'TD', q = c(0,1,2), datatype = "abundan
 ggiNEXT.link <- function(outcome, diversity = 'TD', type = c(1,2,3) ,se = TRUE,facet.var = "Assemblage",
                          color.var = "Order.q", text.size = 12, stript.size = 12){
   if(diversity == 'TD'){
-    res = iNEXT.3D::ggiNEXT3D(outcome, type = type,facet.var = facet.var)
+    res = iNEXT.3D::ggiNEXT3D(outcome, type = c(1,2,3),facet.var = facet.var)
     res[[1]] = res[[1]]+ylab("Taxonomic network diversity")+xlab("Sample size")
     res[[2]] = res[[2]]+xlab("Sample size")
     res[[3]] = res[[3]]+ylab("Taxonomic network diversity")
-    res
+    out = list()
+    j = 1
+    for(i in type){
+
+      out[[j]] = res[[i]]
+      j = j+1
+    }
+    out
   }else if(diversity == 'PD'){
     res = iNEXT.3D::ggiNEXT3D(outcome, type = type,facet.var = facet.var)
     res[[1]] = res[[1]]+ylab("Phylogenetic network diversity")+xlab("Sample size")
     res[[2]] = res[[2]]+xlab("Sample size")
     res[[3]] = res[[3]]+ylab("Phylogenetic network diversity")
-    res
+    out = list()
+    j = 1
+    for(i in type){
+
+      out[[j]] = res[[i]]
+      j = j+1
+    }
+    out
     # # output = outcome
     # # output$iNextEst$size_based = output$iNextEst$size_based%>%
     # #   rename('qD'="PD", 'qD.UCL'="PD.UCL",'qD.LCL'="PD.LCL")
@@ -395,7 +409,14 @@ ggiNEXT.link <- function(outcome, diversity = 'TD', type = c(1,2,3) ,se = TRUE,f
     res[[1]] = res[[1]]+ylab("Functional network diversity")+xlab("Sample size")
     res[[2]] = res[[2]]+xlab("Sample size")
     res[[3]] = res[[3]]+ylab("Functional network diversity")
-    res
+    out = list()
+    j = 1
+    for(i in type){
+
+      out[[j]] = res[[i]]
+      j = j+1
+    }
+    out
   }
 }
 
